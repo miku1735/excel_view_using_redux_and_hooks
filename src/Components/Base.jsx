@@ -4,25 +4,7 @@ import Internal from "./internal";
 import Details from "./details";
 import XLSX from "xlsx";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-var getData = (e, state, setState) => {
-  /* Boilerplate to set up FileReader */
-  const reader = new FileReader();
-  reader.onload = e => {
-    console.log(reader);
-    const res = reader.result;
-    const wb = XLSX.read(res, { type: "binary" });
-    console.log(wb);
-    const sn = wb.SheetNames[0];
-    console.log(sn);
-    const ws = wb.Sheets[sn];
-    console.log(ws);
-    const data = XLSX.utils.sheet_to_json(ws);
-    setState({ data: data });
-    console.log(state.data);
-  };
 
-  reader.readAsBinaryString(state.file);
-};
 export default function Base() {
   const [state, setState] = React.useState({
     file: {},
@@ -44,11 +26,27 @@ export default function Base() {
     ]
   });
   let onChange = ({ target: { files } }) => {
-    var column = state.columns;
     setState({
-      columns: column,
+      ...state,
       file: files[0]
     });
+  };
+  let getData = () => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      console.log(reader);
+      const res = reader.result;
+      const wb = XLSX.read(res, { type: "binary" });
+      console.log(wb);
+      const sn = wb.SheetNames[0];
+      console.log(sn);
+      const ws = wb.Sheets[sn];
+      console.log(ws);
+      const data = XLSX.utils.sheet_to_json(ws);
+      setState({ data: data });
+      console.log(state.data);
+    };
+    reader.readAsBinaryString(state.file);
   };
   return (
     <Router>
@@ -56,18 +54,18 @@ export default function Base() {
         <Nav />
         <Route path="/details">
           <Details
-            state={state}
-            setState={setState}
             onChange={onChange}
             getData={getData}
+            state={state}
+            setState={setState}
           />
         </Route>
         <Route path="/internal" component={Internal}>
           <Internal
-            state={state}
-            setState={setState}
             onChange={onChange}
             getData={getData}
+            state={state}
+            setState={setState}
           />
         </Route>
       </div>
