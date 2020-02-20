@@ -1,26 +1,21 @@
 import React from "react";
 import MaterialTable from "material-table";
-
-export default function SimpleTable(props) {
-  let columns = [
-    { title: "FULL_NAME", field: "fullName" },
-    { title: "Disease", field: "Disease" },
-    { title: "Time_Passed", field: "timePassed", type: "numeric" },
-    { title: "Medicine_Taken", field: "medicineTaken" },
-    { title: "Doctor", field: "Doctor" }
-  ];
-
+import { connect } from "react-redux";
+import { pushData, pushFile, deleteItem } from "../redux/push/action";
+const SimpleTable = props => {
+  console.log({ props });
   return (
     <MaterialTable
-      title="Editable Example"
-      columns={props.state.columns}
-      data={props.state.data}
+      title="Editable Table"
+      columns={props.columns}
+      data={props.data}
       editable={{
         onRowAdd: newData =>
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-              props.setState(prevState => {
+              props.pushData(prevState => {
+                console.log(prevState);
                 const data = [...prevState.data];
                 data.push(newData);
                 return { ...prevState, data };
@@ -32,7 +27,7 @@ export default function SimpleTable(props) {
             setTimeout(() => {
               resolve();
               if (oldData) {
-                props.setState(prevState => {
+                props.pushData(prevState => {
                   const data = [...prevState.data];
                   data[data.indexOf(oldData)] = newData;
                   return { ...prevState, data };
@@ -44,14 +39,27 @@ export default function SimpleTable(props) {
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-              props.setState(prevState => {
-                const data = [...prevState.data];
-                data.splice(data.indexOf(oldData), 1);
-                return { ...prevState, data };
-              });
-            }, 600);
+              props.deleteItem(oldData);
+            });
           })
       }}
     />
   );
-}
+};
+const mapStateToProps = state => {
+  console.log({ state });
+  return {
+    file: state.file,
+    columns: state.columns,
+    data: state.data
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    pushData: data => dispatch(pushData(data)),
+    pushFile: file => dispatch(pushFile(file)),
+    deleteItem: item => dispatch(deleteItem(item))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SimpleTable);

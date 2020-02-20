@@ -16,7 +16,7 @@ class Detail extends Component {
           value="Upload"
           onClick={e => this.props.getData(e)}
         />
-        <SimpleTable state={this.props.state} setState={this.props.setState} />
+        <SimpleTable />
       </div>
     );
   }
