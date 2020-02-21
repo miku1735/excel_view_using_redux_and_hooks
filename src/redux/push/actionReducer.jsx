@@ -2,12 +2,25 @@ import { PUSH_DATA, PUSH_FILE, DELETE_ITEM } from "./actionType";
 
 const initialState = {
   file: {},
-  columns: [
+  columns_tab1: [
     { title: "FULL_NAME", field: "fullName" },
     { title: "Disease", field: "Disease" },
     { title: "Time_Passed", field: "timePassed", type: "numeric" },
-    { title: "Medicine_Taken", field: "medicineTaken" },
-    { title: "Doctor", field: "Doctor" }
+    { title: "Medicine_Taken", field: "medicineTaken" }
+  ],
+  columns_tab2: [
+    { title: "FULL_NAME", field: "fullName", editable: "never" },
+    { title: "Disease", field: "Disease", editable: "never" },
+    {
+      title: "Time_Passed",
+      field: "timePassed",
+      type: "numeric",
+      editable: "never"
+    },
+    { title: "Medicine_Taken", field: "medicineTaken", editable: "never" },
+    { title: "Doctor_Name", field: "Doctor" },
+    { title: "Hospital_Name", field: "hospitalName" },
+    { title: "Appointment_Date", field: "appointmentDate", type: "date" }
   ],
   data: [
     {

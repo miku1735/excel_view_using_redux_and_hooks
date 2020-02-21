@@ -6,7 +6,7 @@ const SimpleTable = props => {
   console.log({ props });
   return (
     <MaterialTable
-      title="Editable Table"
+      title={"Editable Table"}
       columns={props.columns}
       data={props.data}
       editable={{
@@ -39,10 +39,17 @@ const SimpleTable = props => {
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-              props.deleteItem(oldData);
+              if (oldData) {
+                props.deleteItem(oldData);
+              }
             });
           })
       }}
+      options={
+        JSON.stringify(window.location.href).includes("internal") && {
+          exportButton: true
+        }
+      }
     />
   );
 };
@@ -50,7 +57,9 @@ const mapStateToProps = state => {
   console.log({ state });
   return {
     file: state.file,
-    columns: state.columns,
+    columns: JSON.stringify(window.location.href).includes("details")
+      ? state.columns_tab1
+      : state.columns_tab2,
     data: state.data
   };
 };

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import XLSX from "xlsx";
+import SimpleTable from "../Table/table";
 //import FinalTable from "./table2";
 class Internal extends Component {
   render() {
     return (
       <div>
-        {/* <FinalTable state={this.props.state} setState={this.props.setState} /> */}
-        Inetrnal is here
+        <SimpleTable />
       </div>
     );
   }

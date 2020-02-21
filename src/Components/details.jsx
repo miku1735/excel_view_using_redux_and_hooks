@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import XLSX from "xlsx";
-import SimpleTable from "../Table/tab1";
+import SimpleTable from "../Table/table";
 class Detail extends Component {
   render() {
     return (
       <div>
+        <SimpleTable />
         <input
           type="file"
           className="form-control"
@@ -16,7 +17,6 @@ class Detail extends Component {
           value="Upload"
           onClick={e => this.props.getData(e)}
         />
-        <SimpleTable />
       </div>
     );
   }
