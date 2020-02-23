@@ -25,7 +25,11 @@ const initialState = {
       editable: "never"
     },
     { title: "Medicine_Taken", field: "medicineTaken", editable: "never" },
-    { title: "Doctor_Name", field: "Doctor" },
+    {
+      title: "Doctor_Name",
+      field: "Doctor",
+      lookup: { 1: "Sourabh", 2: "Ritesh", 3: "Sajan" }
+    },
     { title: "Hospital_Name", field: "hospitalName" },
     { title: "Appointment_Date", field: "appointmentDate", type: "date" }
   ],
