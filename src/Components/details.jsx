@@ -7,7 +7,7 @@ const Detail = props => {
     column: useSelector(state => state.columns_tab1),
     data: useSelector(state => state.data),
     dispatch: useDispatch(),
-    options: {}
+    options: { selection: true }
   };
   return (
     <div>

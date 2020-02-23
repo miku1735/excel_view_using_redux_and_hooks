@@ -5,6 +5,7 @@ import {
   ADD_ITEM,
   UPDATE_ITEM
 } from "./actionType";
+import Popup from "../../Components/css/popup";
 
 const initialState = {
   file: {},
@@ -75,8 +76,12 @@ export const actionReducer = (state = initialState, action) => {
       };
 
     case UPDATE_ITEM:
+      const data1 = [...state.data];
+      data1[data1.indexOf(action.oldData)] = action.newData;
+
       return {
-        ...state
+        ...state,
+        data: [...data1]
       };
 
     default:

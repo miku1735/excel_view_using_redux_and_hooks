@@ -27,11 +27,7 @@ const SimpleTable = props => {
             setTimeout(() => {
               resolve();
               if (oldData) {
-                props.pushData(prevState => {
-                  const data = [...prevState.data];
-                  data[data.indexOf(oldData)] = newData;
-                  return { ...prevState, data };
-                });
+                props.dispatch(updateItem(newData, oldData));
               }
             }, 600);
           }),
@@ -46,6 +42,14 @@ const SimpleTable = props => {
           })
       }}
       options={props.options}
+      actions={[
+        {
+          tooltip: "Remove All Selected Users",
+          icon: "delete",
+          onClick: (evt, data) =>
+            alert("You want to delete " + data.length + " rows")
+        }
+      ]}
     />
   );
 };

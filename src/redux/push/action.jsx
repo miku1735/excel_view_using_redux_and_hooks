@@ -35,9 +35,10 @@ export const addItem = (data, len) => {
   };
 };
 
-export const updateItem = data => {
+export const updateItem = (newData, oldData) => {
   return {
-    type: updateItem,
-    payload: data
+    type: UPDATE_ITEM,
+    newData: newData,
+    oldData: oldData
   };
 };
