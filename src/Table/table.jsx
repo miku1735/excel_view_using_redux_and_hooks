@@ -1,26 +1,26 @@
 import React from "react";
 import MaterialTable from "material-table";
 import { connect } from "react-redux";
-import { pushData, pushFile, deleteItem } from "../redux/push/action";
+import {
+  pushData,
+  pushFile,
+  deleteItem,
+  addItem,
+  updateItem
+} from "../redux/push/action";
 const SimpleTable = props => {
-  console.log({ props });
   return (
     <MaterialTable
       title={"Editable Table"}
-      columns={props.columns}
+      columns={props.column}
       data={props.data}
       editable={{
         onRowAdd: newData =>
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-              props.pushData(prevState => {
-                console.log(prevState);
-                const data = [...prevState.data];
-                data.push(newData);
-                return { ...prevState, data };
-              });
-            }, 600);
+              props.dispatch(addItem(newData, props.column));
+            });
           }),
         onRowUpdate: (newData, oldData) =>
           new Promise(resolve => {
@@ -40,35 +40,13 @@ const SimpleTable = props => {
             setTimeout(() => {
               resolve();
               if (oldData) {
-                props.deleteItem(oldData);
+                props.dispatch(deleteItem(oldData));
               }
             });
           })
       }}
-      options={
-        JSON.stringify(window.location.href).includes("internal") && {
-          exportButton: true
-        }
-      }
+      options={props.options}
     />
   );
 };
-const mapStateToProps = state => {
-  console.log({ state });
-  return {
-    file: state.file,
-    columns: JSON.stringify(window.location.href).includes("details")
-      ? state.columns_tab1
-      : state.columns_tab2,
-    data: state.data
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    pushData: data => dispatch(pushData(data)),
-    pushFile: file => dispatch(pushFile(file)),
-    deleteItem: item => dispatch(deleteItem(item))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SimpleTable);
+export default SimpleTable;

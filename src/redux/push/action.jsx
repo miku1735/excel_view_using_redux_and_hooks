@@ -1,4 +1,10 @@
-import { PUSH_DATA, PUSH_FILE, DELETE_ITEM } from "./actionType";
+import {
+  PUSH_DATA,
+  PUSH_FILE,
+  DELETE_ITEM,
+  ADD_ITEM,
+  UPDATE_ITEM
+} from "./actionType";
 
 export const pushData = data => {
   return {
@@ -17,6 +23,21 @@ export const pushFile = file => {
 export const deleteItem = data => {
   return {
     type: DELETE_ITEM,
+    payload: data
+  };
+};
+
+export const addItem = (data, len) => {
+  return {
+    type: ADD_ITEM,
+    payload: data,
+    colLength: len
+  };
+};
+
+export const updateItem = data => {
+  return {
+    type: updateItem,
     payload: data
   };
 };

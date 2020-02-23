@@ -1,15 +1,20 @@
 import React, { Component } from "react";
-import XLSX from "xlsx";
 import SimpleTable from "../Table/table";
-//import FinalTable from "./table2";
-class Internal extends Component {
-  render() {
-    return (
-      <div>
-        <SimpleTable />
-      </div>
-    );
-  }
-}
+import { useSelector, useDispatch } from "react-redux";
 
+const Internal = () => {
+  let internalProps = {
+    column: useSelector(state => state.columns_tab2),
+    data: useSelector(state => state.data),
+    dispatch: useDispatch(),
+    options: {
+      exportButton: true
+    }
+  };
+  return (
+    <div>
+      <SimpleTable {...internalProps} />
+    </div>
+  );
+};
 export default Internal;
