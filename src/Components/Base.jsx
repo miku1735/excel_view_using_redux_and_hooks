@@ -3,13 +3,12 @@ import Nav from "./nav";
 import Internal from "./internal";
 import Details from "./details";
 import XLSX from "xlsx";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { pushData, pushFile } from "../redux";
 
 const Base = props => {
   let onChange = ({ target: { files } }) => {
-    console.log(files[0]);
     props.pushFile(files[0]);
   };
 
@@ -39,6 +38,7 @@ const Base = props => {
     <Router>
       <div>
         <Nav />
+        <Redirect from="/" to="details" />
         <Route path="/details">
           <Details onChange={onChange} getData={getData} />
         </Route>

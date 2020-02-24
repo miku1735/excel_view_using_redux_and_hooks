@@ -13,7 +13,7 @@ class Nav extends Component {
           aria-disabled="true"
         ></a>
         <div>
-          <h1>Hospital Patient Details </h1>
+          <h1 style={{ color: "white" }}>Hospital Patient Details </h1>
         </div>
         <Link className="flex-sm-fill text-sm-center nav-link" to="/details">
           <h5>Details</h5>

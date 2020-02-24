@@ -6,7 +6,6 @@ import {
   UPDATE_ITEM,
   DEL_MULTIPLE
 } from "./actionType";
-import Popup from "../../Components/css/popup";
 
 const initialState = {
   file: {},
@@ -58,7 +57,6 @@ export const actionReducer = (state = initialState, action) => {
       };
 
     case PUSH_FILE:
-      console.log(action.payload);
       return {
         ...state,
         file: action.payload

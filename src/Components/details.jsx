@@ -8,7 +8,12 @@ const Detail = props => {
     column: useSelector(state => state.columns_tab1),
     data: useSelector(state => state.data),
     dispatch: useDispatch(),
-    options: { selection: true },
+    options: {
+      selection: true,
+      rowStyle: rowData => ({
+        backgroundColor: rowData.fullName === "Mayank" ? "grey" : "white"
+      })
+    },
     actions: [
       {
         tooltip: "Remove All Selected Users",
