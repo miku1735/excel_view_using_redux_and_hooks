@@ -3,7 +3,8 @@ import {
   PUSH_FILE,
   DELETE_ITEM,
   ADD_ITEM,
-  UPDATE_ITEM
+  UPDATE_ITEM,
+  DEL_MULTIPLE
 } from "./actionType";
 
 export const pushData = data => {
@@ -40,5 +41,12 @@ export const updateItem = (newData, oldData) => {
     type: UPDATE_ITEM,
     newData: newData,
     oldData: oldData
+  };
+};
+
+export const delMultiple = data => {
+  return {
+    type: DEL_MULTIPLE,
+    payload: data
   };
 };

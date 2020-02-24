@@ -7,6 +7,7 @@ const Internal = () => {
     column: useSelector(state => state.columns_tab2),
     data: useSelector(state => state.data),
     dispatch: useDispatch(),
+    actions: [],
     options: {
       exportButton: true
     }

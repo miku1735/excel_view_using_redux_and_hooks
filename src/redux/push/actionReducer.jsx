@@ -3,7 +3,8 @@ import {
   PUSH_FILE,
   DELETE_ITEM,
   ADD_ITEM,
-  UPDATE_ITEM
+  UPDATE_ITEM,
+  DEL_MULTIPLE
 } from "./actionType";
 import Popup from "../../Components/css/popup";
 
@@ -86,6 +87,15 @@ export const actionReducer = (state = initialState, action) => {
       return {
         ...state,
         data: [...data1]
+      };
+    case DEL_MULTIPLE:
+      let data2 = [...state.data];
+      for (let i = 0; i < action.payload.length; i++) {
+        data2 = data2.filter(val => val.id !== action.payload[i].id);
+      }
+      return {
+        ...state,
+        data: [...data2]
       };
 
     default:

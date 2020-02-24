@@ -2,12 +2,23 @@ import React, { Component } from "react";
 import SimpleTable from "../Table/table";
 import "./css/index.css";
 import { useSelector, useDispatch } from "react-redux";
+import { delMultiple } from "../redux/push/action";
 const Detail = props => {
   let detailProps = {
     column: useSelector(state => state.columns_tab1),
     data: useSelector(state => state.data),
     dispatch: useDispatch(),
-    options: { selection: true }
+    options: { selection: true },
+    actions: [
+      {
+        tooltip: "Remove All Selected Users",
+        icon: "delete",
+        onClick: (evt, data) => {
+          alert("You want to delete " + data.length + " rows");
+          detailProps.dispatch(delMultiple(data));
+        }
+      }
+    ]
   };
   return (
     <div>
