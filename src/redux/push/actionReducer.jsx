@@ -6,6 +6,8 @@ import {
   UPDATE_ITEM,
   DEL_MULTIPLE
 } from "./actionType";
+import Check from "../../Components/check";
+import React, { Component } from "react";
 
 const initialState = {
   file: {},
@@ -31,7 +33,12 @@ const initialState = {
       lookup: { 1: "Sourabh", 2: "Ritesh", 3: "Sajan" }
     },
     { title: "Hospital_Name", field: "hospitalName" },
-    { title: "Appointment_Date", field: "appointmentDate", type: "date" }
+    { title: "Appointment_Date", field: "appointmentDate", type: "date" },
+    {
+      title: "Custom_Component",
+      field: "customComponent",
+      editComponent: props => <Check />
+    }
   ],
   data: [
     {
